@@ -39,10 +39,10 @@ public class Main {
             int keuze = scanner.nextInt();
             switch (keuze) {
                 case 1:
-                    maakDienstFactuur();
+                    maakFactuur(keuze);
                     break;
                 case 2:
-                    maakProductFactuur();
+                    maakFactuur(keuze);
                     break;
                 case 3:
                     printAlleFacturen();
@@ -140,29 +140,49 @@ public class Main {
         scanner.nextLine();
     }
 
+    private static void DienstFactuurVragen(Factuur dienst){
+        System.out.println("op welke locatie werkte U?");
+        String titel = scanner.nextLine();
+        System.out.println("welke werkgever?");
+        String werkgever = scanner.nextLine();
+        System.out.println("om hoeveel btw gaat het?");
+        int btw = scanner.nextInt();
+        System.out.println("hoeveel is de uurloon?");
+        int bedrag = scanner.nextInt();
+        System.out.println("hoeveel uur heeft u gewerkt?");
+        int aantalUur = scanner.nextInt();
+        scanner.nextLine();
+        dienst.alleOmschrijvingen.add(new Omschrijving(titel, werkgever, btw, bedrag, aantalUur));
+    }
+
+    private static void productFactuurvragen(Factuur product){
+        System.out.println("naam van het product?");
+        String productNaam = scanner.nextLine();
+        System.out.println("Aantal?");
+        int productAantal = scanner.nextInt();
+        System.out.println("Kosten per stuk?");
+        double kostenPerStuk = scanner.nextDouble();
+        System.out.println("btw van het product?");
+        int productBtw = scanner.nextInt();
+        scanner.nextLine();
+        product.alleOmschrijvingen.add(new Omschrijving(productNaam, productAantal, kostenPerStuk, productBtw));
+    }
 
 
-    private static void addOmschrijving(boolean meerOmschrijvingen, Factuur dienst){
+    private static void addOmschrijving(boolean meerOmschrijvingen, Factuur factuur, int typeFactuur){
+
         while (meerOmschrijvingen) {
             System.out.println("hoeveel omschrijvingen wilt u?");
             int aantalOmschrijvingen = scanner.nextInt();
             scanner.nextLine();
+
             while (aantalOmschrijvingen > 0) {
-
-                System.out.println("op welke locatie werkte U?");
-                String titel = scanner.nextLine();
-                System.out.println("welke werkgever?");
-                String werkgever = scanner.nextLine();
-                System.out.println("om hoeveel btw gaat het?");
-                int btw = scanner.nextInt();
-                System.out.println("hoeveel is de uurloon?");
-                int bedrag = scanner.nextInt();
-                System.out.println("hoeveel uur heeft u gewerkt?");
-                int aantalUur = scanner.nextInt();
-                scanner.nextLine();
-                dienst.alleOmschrijvingen.add(new Omschrijving(titel, werkgever, btw, bedrag, aantalUur));
-
-
+                if(typeFactuur == 1) {
+                    DienstFactuurVragen(factuur);
+                }
+                else {
+                    productFactuurvragen(factuur);
+                }
                 System.out.println("omschrijving aangemaakt, nog " + (aantalOmschrijvingen -= 1) + " omschrijving(en) te gaan");
                 System.out.println("--------------------------------------------------------------------");
             }
@@ -177,73 +197,72 @@ public class Main {
     }
 
     //aanmaken van een Dienstfactuur
-    private static void maakDienstFactuur() {
+    private static void maakFactuur(int typeFactuur) {
+        Factuur factuur;
         if (ingelogd) {
-            boolean meerOmschrijvingen = true;
-            if (btwNummer == 0) {
-                btwNummerAanpassen();
-            }
             System.out.print("factuur naam:");
             String factuurNaam = scanner.nextLine();
+            boolean meerOmschrijvingen = true;
+            if(typeFactuur ==1) {
+                if (btwNummer == 0) {
+                    btwNummerAanpassen();
+                }
+                factuur = new DienstFactuur(user1, factuurNaam, btwNummer, java.time.LocalDate.now().toString());
+            }
+            else{
+                factuur = new ProductFactuur(user1,factuurNaam, java.time.LocalDate.now().toString());
+            }
+            addOmschrijving(meerOmschrijvingen, factuur, typeFactuur);
 
-            Factuur dienst = new DienstFactuur(user1, factuurNaam, btwNummer, java.time.LocalDate.now().toString());
-
-            addOmschrijving(meerOmschrijvingen, dienst);
-
-            facturen.add(dienst);
-            dienst.printFactuur();
+            facturen.add(factuur);
+            factuur.printFactuur();
             System.out.println("--------------------------------------------------------------------");
         } else{ inloggen(); }
     }
+//
+//
+//
+//    //aanmaken van een Productfactuur
+//    private static void maakProductFactuur(int typeFactuur) {
+//        boolean meerOmschrijvingen = true;
+//        System.out.print("factuur naam:");
+//        String factuurNaam = scanner.nextLine();
+//
+//        Factuur product = new ProductFactuur(user1,factuurNaam, java.time.LocalDate.now().toString());
+//
+//        while (meerOmschrijvingen) {
+//            System.out.println("hoeveel omschrijvingen wilt u?");
+//            int aantalOmschrijvingen = scanner.nextInt();
+//            scanner.nextLine();
+//            while (aantalOmschrijvingen > 0) {
+//
+//                productFactuurvragen(product);
+//
+//                System.out.println("omschrijving aangemaakt, nog " + (aantalOmschrijvingen -= 1) + " omschrijving(en) te gaan");
+//                System.out.println("--------------------------------------------------------------------");
+//            }
+//
+//            System.out.println("wil je toch nog meer omschrijvingen toevoegen? y of n");
+//
+//            String meer = scanner.nextLine();
+//            if (meer.equals("N") || meer.equals("n")) {
+//                meerOmschrijvingen = false;
+//            }
+//        }
+//        facturen.add(product);
+//        product.printFactuur();
+//        System.out.println("--------------------------------------------------------------------");
+//    }
 
-
-    //aanmaken van een Productfactuur
-    private static void maakProductFactuur() {
-        boolean meerOmschrijvingen = true;
-        System.out.print("factuur naam:");
-        String factuurNaam = scanner.nextLine();
-
-        Factuur product = new ProductFactuur(user1,factuurNaam, java.time.LocalDate.now().toString());
-
-        while (meerOmschrijvingen) {
-            System.out.println("hoeveel omschrijvingen wilt u?");
-            int aantalOmschrijvingen = scanner.nextInt();
-            scanner.nextLine();
-            while (aantalOmschrijvingen > 0) {
-
-                System.out.println("naam van het product?");
-                String productNaam = scanner.nextLine();
-                System.out.println("Aantal?");
-                int productAantal = scanner.nextInt();
-                System.out.println("Kosten per stuk?");
-                double kostenPerStuk = scanner.nextDouble();
-                System.out.println("btw van het product?");
-                int productBtw = scanner.nextInt();
-                scanner.nextLine();
-                product.alleOmschrijvingen.add(new Omschrijving(productNaam, productAantal, kostenPerStuk, productBtw));
-
-
-                System.out.println("omschrijving aangemaakt, nog " + (aantalOmschrijvingen -= 1) + " omschrijving(en) te gaan");
-                System.out.println("--------------------------------------------------------------------");
-            }
-
-            System.out.println("wil je toch nog meer omschrijvingen toevoegen? y of n");
-
-            String meer = scanner.nextLine();
-            if (meer.equals("N") || meer.equals("n")) {
-                meerOmschrijvingen = false;
-            }
-        }
-        facturen.add(product);
-        product.printFactuur();
+    private static void geenFactuur(){
+        System.out.println("er zijn nog geen facturen, maak er eerst een aan!");
         System.out.println("--------------------------------------------------------------------");
+        System.out.println();
     }
 
     private static void printAlleFacturen(){
         if(facturen.size()<= 0) {
-            System.out.println("er zijn nog geen facturen, maak er eerst een aan!");
-            System.out.println("--------------------------------------------------------------------");
-            System.out.println();
+            geenFactuur();
         }
         for (int i = 0; i < facturen.size(); i++){
             if(user1.getNaam().equals(facturen.get(i).user.getNaam())) {
