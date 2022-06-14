@@ -42,15 +42,9 @@ public class Omschrijving {
         return bedrag;
     }
 
-    public int getAantalUur() {
-        return aantalUur;
-    }
-
     public int getAantal() {
         return aantal;
     }
 
-    public double getStukPrijs() {
-        return stukPrijs;
-    }
+
 }

@@ -19,12 +19,12 @@ public class FactuurOptieTest {
     @Test
     public void kosten() {
 
-        FactuurOptie factuurOptie1 = new FactuurOptie(0.4, true, "Dienst", true);
-        FactuurOptie factuurOptie2 = new FactuurOptie(0.4, false, "Product", false);
-        FactuurOptie factuurOptie3 = new FactuurOptie(0.6, true, "Product", true);
-        FactuurOptie factuurOptie4 = new FactuurOptie(0.7, false, "Dienst", false);
-        FactuurOptie factuurOptie5 = new FactuurOptie(0.2, true, "Dienst", false);
-        FactuurOptie factuurOptie6 = new FactuurOptie(0.8, false, "Product", true);
+        FactuurOptie factuurOptie1 = new FactuurOptie(0.4, true, "Dienst", true, "ZZP");
+        FactuurOptie factuurOptie2 = new FactuurOptie(0.4, false, "Product", false, "ZZP");
+        FactuurOptie factuurOptie3 = new FactuurOptie(0.6, true, "Product", true, "ZZP");
+        FactuurOptie factuurOptie4 = new FactuurOptie(0.7, false, "Dienst", false, "ZZP");
+        FactuurOptie factuurOptie5 = new FactuurOptie(0.2, true, "Dienst", false, "ZZP");
+        FactuurOptie factuurOptie6 = new FactuurOptie(0.8, false, "Product", true, "ZZP");
         alleFactuurOptie.add(factuurOptie1);
         alleFactuurOptie.add(factuurOptie2);
         alleFactuurOptie.add(factuurOptie3);

@@ -18,8 +18,8 @@ public class ProductFactuurTest {
         for (int i = 0; i < alleOmschrijvingen.size(); i++){
             System.out.println(alleOmschrijvingen.get(i).getTitel()+ "   " +
                     alleOmschrijvingen.get(i).getAantal()+ "   " +
-                    alleOmschrijvingen.get(i).getStukPrijs()+ "   " +
-                    alleOmschrijvingen.get(i).getStukPrijs() * alleOmschrijvingen.get(i).getAantal()+ "   " +
+                    alleOmschrijvingen.get(i).getBedrag()+ "   " +
+                    alleOmschrijvingen.get(i).getBedrag() * alleOmschrijvingen.get(i).getAantal()+ "   " +
                     alleOmschrijvingen.get(i).getBtw());
         }
         System.out.println("------------------------------------------------------------------------");

@@ -28,7 +28,7 @@ public class DienstFactuur extends Factuur{
     protected void printOmschrijving(ArrayList<Omschrijving> alleOmschrijvingen, int i) {
         System.out.println(alleOmschrijvingen.get(i).getTitel()+ "   " +
                 alleOmschrijvingen.get(i).getWerkgever()+ "   " +
-                alleOmschrijvingen.get(i).getAantalUur()+ "   " +
+                alleOmschrijvingen.get(i).getAantal()+ "   " +
                 alleOmschrijvingen.get(i).getBtw()+ "   " +
                 alleOmschrijvingen.get(i).getBedrag());
     }

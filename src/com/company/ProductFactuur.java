@@ -17,18 +17,18 @@ public class ProductFactuur extends Factuur{
             printOmschrijving(alleOmschrijvingen, i);
         }
         System.out.println("------------------------------------------------------------------------");
-        System.out.println("totaal exc BTW      " + totaalBedragProduct());
-        System.out.println("BTW                 " + (btwBedragProduct()));
+        System.out.println("totaal exc BTW      " + totaalBedrag());
+        System.out.println("BTW                 " + (btwBedrag()));
         System.out.println("----------------------------------");
-        System.out.println("Totaal inc BTW      " + (btwBedragProduct() + totaalBedragProduct()));
+        System.out.println("Totaal inc BTW      " + (btwBedrag() + totaalBedrag()));
     }
 
     @Override
     protected void printOmschrijving(ArrayList<Omschrijving> alleOmschrijvingen, int i) {
         System.out.println(alleOmschrijvingen.get(i).getTitel()+ "   " +
-                alleOmschrijvingen.get(i).getWerkgever()+ "   " +
-                alleOmschrijvingen.get(i).getAantalUur()+ "   " +
-                alleOmschrijvingen.get(i).getBtw()+ "   " +
-                alleOmschrijvingen.get(i).getBedrag());
+                alleOmschrijvingen.get(i).getAantal()+ "   " +
+                alleOmschrijvingen.get(i).getBedrag()+ "   " +
+                alleOmschrijvingen.get(i).getBedrag() * alleOmschrijvingen.get(i).getAantal()+ "   " +
+                alleOmschrijvingen.get(i).getBtw());
     }
 }

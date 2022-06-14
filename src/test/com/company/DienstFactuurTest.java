@@ -26,7 +26,7 @@ public class DienstFactuurTest {
                     alleOmschrijvingen.get(i).getWerkgever()+ "   " +
                     alleOmschrijvingen.get(i).getBtw()+ "   " +
                     alleOmschrijvingen.get(i).getBedrag()+ "   " +
-                    alleOmschrijvingen.get(i).getAantalUur());
+                    alleOmschrijvingen.get(i).getAantal());
         }
         System.out.println("------------------------------------------------------------------------");
         System.out.println("totaal exc BTW      " + 42);
@@ -36,7 +36,7 @@ public class DienstFactuurTest {
 
         assertEquals(dienst.alleOmschrijvingen.get(0).getTitel(), "titel");
         assertEquals(dienst.alleOmschrijvingen.get(0).getWerkgever(), "werkgever");
-        assertEquals(dienst.alleOmschrijvingen.get(0).getAantalUur(), 21);
+        assertEquals(dienst.alleOmschrijvingen.get(0).getAantal(), 21);
         assertEquals(dienst.naam, "testfactuur");
         assertEquals(dienst.btwNummer, 123456789);
         assertEquals(dienst.factuurDatum, "10-10-2022");

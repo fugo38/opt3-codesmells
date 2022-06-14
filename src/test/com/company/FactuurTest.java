@@ -18,7 +18,7 @@ public class FactuurTest {
 
         int bedrag = 0;
         for(int i = 0; i < alleOmschrijvingen.size(); i++){
-            bedrag += alleOmschrijvingen.get(i).getStukPrijs() * alleOmschrijvingen.get(i).getAantal();
+            bedrag += alleOmschrijvingen.get(i).getBedrag() * alleOmschrijvingen.get(i).getAantal();
         }
 
         assertEquals(bedrag, 27);
@@ -32,7 +32,7 @@ public class FactuurTest {
 
         double btwBedrag = 0;
         for(int i = 0; i < alleOmschrijvingen.size(); i++){
-            btwBedrag += (alleOmschrijvingen.get(i).getStukPrijs() * alleOmschrijvingen.get(i).getAantal()) * (alleOmschrijvingen.get(i).getBtw() /100);
+            btwBedrag += (alleOmschrijvingen.get(i).getBedrag() * alleOmschrijvingen.get(i).getAantal()) * (alleOmschrijvingen.get(i).getBtw() /100);
         }
         assertEquals(btwBedrag, 3, 3.4485);
     }

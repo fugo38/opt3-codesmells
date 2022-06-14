@@ -2,32 +2,22 @@ package com.company;
 
 public class FactuurOptie {
     private double korting;
-    private  boolean abbonement;
+    public boolean abbonement;
     private String factuurType;
-    private boolean specialFeatures;
+    public boolean specialFeatures;
+    public String bedrijfType;
 
 
-
-    public FactuurOptie(double korting, boolean abbonement, String factuurType, boolean specialFeatures) {
+    public FactuurOptie(double korting, boolean abbonement, String factuurType, boolean specialFeatures, String bedrijfType) {
         this.korting = korting;
         this.abbonement = abbonement;
         this.factuurType = factuurType;
         this.specialFeatures = specialFeatures;
+        this.bedrijfType = bedrijfType;
     }
 
-    public double kosten(){
-            int kosten = 1;
-            kosten *= korting;
-
-            if(abbonement){
-                kosten *= 0.7;
-            }
-            if(specialFeatures){
-                kosten *= 1.4;
-            }
-
-
-        return kosten;
+    public double kosten(double prijs){
+        return new Kosten(this).berekenKorting(prijs);
     }
 
 
